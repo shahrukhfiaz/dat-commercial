@@ -5,12 +5,16 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Environment files (keep .env.example)
+# Environment files (keep .env.example and env.example)
 .env
-.env.local
-.env.development
-.env.test
-.env.production.local
+.env.*
+*.env
+!env.example
+!.env.example
+production.env
+CLOUD_CONFIG.env
+NEW_SERVER_CONFIG.env
+client-production.env
 
 # Build outputs
 dist/
