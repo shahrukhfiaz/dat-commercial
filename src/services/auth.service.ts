@@ -47,10 +47,10 @@ export async function login(
 
   // Check if user exists and is active
   if (!user || user.status !== 'ACTIVE') {
-    // Record failed login attempt
-    if (metadata) {
+    // Record failed login attempt only if user exists (to avoid FK constraint violation)
+    if (metadata && user) {
       await createLoginHistory({
-        userId: user?.id || 'unknown',
+        userId: user.id,
         email,
         ipAddress: metadata.ipAddress,
         userAgent: metadata.userAgent,
