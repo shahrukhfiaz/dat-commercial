@@ -102,9 +102,11 @@ export async function login(
   if (existingSessions.length > 0) {
     // Get info about the previous session for the alert
     const oldSession = existingSessions[0];
-    previousDevice = oldSession.deviceInfo || 'Unknown Device';
-    previousIP = oldSession.ipAddress || 'Unknown IP';
-    previousLocation = oldSession.location;
+    if (oldSession) {
+      previousDevice = oldSession.deviceInfo || 'Unknown Device';
+      previousIP = oldSession.ipAddress || 'Unknown IP';
+      previousLocation = oldSession.location;
+    }
 
     // Invalidate all existing sessions
     for (const session of existingSessions) {

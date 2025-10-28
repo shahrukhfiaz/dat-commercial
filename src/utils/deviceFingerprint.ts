@@ -49,7 +49,7 @@ export function parseDeviceInfo(userAgent: string | undefined): DeviceInfo {
   } else if (userAgent.includes('Mac OS X')) {
     info.os = 'macOS';
     const match = userAgent.match(/Mac OS X (\d+[._]\d+[._]\d+)/);
-    if (match) {
+    if (match && match[1]) {
       info.osVersion = match[1].replace(/_/g, '.');
     }
   } else if (userAgent.includes('Linux')) {
@@ -63,7 +63,7 @@ export function parseDeviceInfo(userAgent: string | undefined): DeviceInfo {
   } else if (userAgent.includes('iOS') || userAgent.includes('iPhone') || userAgent.includes('iPad')) {
     info.os = 'iOS';
     const match = userAgent.match(/OS (\d+_\d+)/);
-    if (match) {
+    if (match && match[1]) {
       info.osVersion = match[1].replace(/_/g, '.');
     }
   }
