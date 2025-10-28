@@ -47,14 +47,17 @@ export async function createSecurityAlert(params: CreateAlertParams) {
 export async function createMultipleDeviceLoginAlert(params: {
   userId: string;
   userEmail: string;
-  previousDevice: string;
-  previousIP: string;
+  previousDevice: string | null;
+  previousIP: string | null;
   previousLocation: string | null;
   newDevice: string;
   newIP: string;
   newLocation: string | null;
 }) {
-  const message = `${params.userEmail} logged in from a new device. Previous session on ${params.previousDevice} (${params.previousIP}) was terminated.`;
+  const previousInfo = params.previousDevice && params.previousIP 
+    ? `Previous session on ${params.previousDevice} (${params.previousIP}) was terminated.`
+    : 'No previous session found.';
+  const message = `${params.userEmail} logged in from a new device. ${previousInfo}`;
 
   return createSecurityAlert({
     userId: params.userId,
